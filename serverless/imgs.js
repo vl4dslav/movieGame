@@ -1,22 +1,20 @@
-const fetch = require("node-fetch");
+const axios = require("axios");
 require("dotenv").config();
-// export "X-RapidAPI-Key" from   2    options
-const urlBase =
-  "https://imdb8.p.rapidapi.com/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US";
-
-// let urlImgs = `https://imdb8.p.rapidapi.com/title/get-images?tconst=tt10872600&limit=25`;
 
 exports.handler = async (event, context) => {
-  const optionsBase = {
+  const optionBase = {
     method: "GET",
+    url: "https://imdb8.p.rapidapi.com/title/get-top-rated-movies",
     headers: {
       "X-RapidAPI-Key": process.env.API_KEY,
       "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
     },
   };
 
-  const optionsImgs = {
+  const optionImages = {
     method: "GET",
+    url: "https://imdb8.p.rapidapi.com/title/get-images",
+    params: { tconst: "tt0944947", limit: "25" },
     headers: {
       "X-RapidAPI-Key": process.env.API_KEY,
       "X-RapidAPI-Host": "imdb8.p.rapidapi.com",
@@ -24,36 +22,40 @@ exports.handler = async (event, context) => {
   };
 
   try {
-    const base = await fetch(urlBase, optionsBase).then((response) =>
-      response.json()
-    );
-    //   .then((response) => setBase(response))
-    // .catch((err) => console.error(err));
-
-    const urlSnippet = base[Math.floor(Math.random() * 100)].slice(7, -1);
-    //   console.log(urlSnippet);
-    const urlImgs = `https://imdb8.p.rapidapi.com/title/get-images?tconst=${urlSnippet}&limit=25`;
-    //   console.log(urlImgs);
-    const data = fetch(urlImgs, optionsImgs)
-      .then((response) => response.json())
+    const base = await axios
+      .request(optionBase)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+    const urlSnippet = base[Math.floor(Math.random() * 150)].id.slice(7, -1);
+    optionImages.params.tconst = urlSnippet;
+    const data = await axios
+      .request(optionImages)
+      .then(function (response) {
+        return response.data;
+      })
       .then((response) => {
-        // setData(response.images);
         const re = /(?<=(in ))(.*?)(?=( \())/;
-        // setTitle(response.images[0].caption.match(re)[0]); //here error ? why ?
         return {
           images: response.images,
           title: response.images[0].caption.match(re)[0],
         };
+      })
+      .catch(function (error) {
+        console.error(error);
       });
-    // .catch((err) => console.error(err));
     return {
       statusCode: 200,
       body: JSON.stringify(data),
     };
-  } catch (err) {
+  } catch (error) {
+    console.log(error);
     return {
-      statusCode: 422,
-      body: err.stack,
+      statusCode: 400,
+      body: JSON.stringify({ error }),
     };
   }
 };

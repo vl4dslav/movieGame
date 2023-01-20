@@ -3,8 +3,6 @@ import React, { useState } from "react";
 function ImgSlider(props) {
   const [index, setIndex] = useState(0);
   const changeIndex = (direction) => {
-    console.log(props.imgs);
-    console.log(index);
     if (direction === "next") {
       setIndex((prev) => (prev + 1) % props.imgs.length);
     } else if (direction === "prev") {
@@ -25,9 +23,9 @@ function ImgSlider(props) {
               <path
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="48"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="48"
                 d="M328 112L184 256l144 144"
               />
             </svg>
@@ -37,9 +35,9 @@ function ImgSlider(props) {
               <path
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="48"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="48"
                 d="M184 112l144 144-144 144"
               />
             </svg>

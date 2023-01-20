@@ -18,7 +18,8 @@ function DataProvider({ children }) {
       .then((data) => {
         setData(data.images);
         setTitle(data.title);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [updateMovie]);
 
   return (
