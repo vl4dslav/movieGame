@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { DataContext } from "../DataContext";
 import ImgSlider from "./imgSlider";
 
@@ -9,8 +9,9 @@ function ShowImages() {
       if (index < attempt) {
         return img.url;
       }
+      return null;
     })
-    .filter((elem) => elem !== undefined);
+    .filter((elem) => elem !== null);
   return (
     <div className="images">
       <ImgSlider imgs={images} />
