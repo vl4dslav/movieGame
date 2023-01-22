@@ -9,7 +9,7 @@ function DataProvider({ children }) {
   const [index, setIndex] = useState(0);
   const [movieCounter, setMovieCounter] = useState(1);
   const [loading, setLoading] = useState(true);
-  const wasRendered = useRef(false);
+  const wasRendered = useRef(false); // useRefffffffff
 
   const preload = (imgArr, i) => {
     i = i || 0;
