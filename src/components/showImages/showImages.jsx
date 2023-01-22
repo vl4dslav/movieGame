@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { DataContext } from "../DataContext";
-import ImgSlider from "./imgSlider";
+import { DataContext } from "../../DataContext";
+import ImgSlider from "../img-slider/imgSlider";
+import "./showImages.css";
 
 function ShowImages() {
   const { data, attempt } = useContext(DataContext);

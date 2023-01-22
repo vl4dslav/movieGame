@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { DataContext } from "../DataContext";
+import { DataContext } from "../../DataContext";
+import "./input.css";
 
 function Input() {
   const { attempt, newAttempt, title, reloadImgs, points, setPoints } =

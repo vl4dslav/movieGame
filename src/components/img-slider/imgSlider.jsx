@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { DataContext } from "../../DataContext";
+import "./imgSlider.css";
 
 function ImgSlider(props) {
-  const [index, setIndex] = useState(0);
+  const { index, setIndex } = useContext(DataContext);
+
   const changeIndex = (direction) => {
     if (direction === "next") {
       setIndex((prev) => (prev + 1) % props.imgs.length);
@@ -11,11 +14,12 @@ function ImgSlider(props) {
       );
     }
   };
+
   return (
     <div className="img-slider">
-      <div className="img-box">
-        <img src={props.imgs[index]} alt="img" />
-      </div>
+      {/* <div className="img-box"> */}
+      <img src={props.imgs[index]} alt="img" />
+      {/* </div> */}
       {props.imgs.length > 1 ? (
         <>
           <div className="btn btn-prev" onClick={() => changeIndex("prev")}>

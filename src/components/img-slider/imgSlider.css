@@ -1,0 +1,50 @@
+.img-slider {
+  margin: 0 auto;
+}
+
+.img-slider img {
+  max-height: 60vh;
+  max-width: 60vw;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #497174;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-prev {
+  left: 2%;
+}
+
+.btn-next {
+  right: 2%;
+}
+
+svg {
+  color: #eff5f5;
+}
+
+.btn-prev svg {
+  transform: translateX(-5%);
+}
+
+.btn-next svg {
+  transform: translateX(5%);
+}
+
+.btn:hover {
+  background-color: #eff5f5;
+}
+
+.btn:hover svg {
+  color: #497174;
+}
